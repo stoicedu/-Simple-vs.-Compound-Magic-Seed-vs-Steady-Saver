@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Seed vs Steady Saver: Learn About Interest</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-purple-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-purple-800 mb-4">
+                <i class="fas fa-piggy-bank mr-2"></i>
+                Magic Seed vs Steady Saver
+            </h1>
+            <p class="text-xl text-gray-700">Learn How Interest Works!</p>
+        </div>
+
+        <!-- Interest Explanation Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-center text-green-600 mb-4">
+                <i class="fas fa-lightbulb mr-2"></i>
+                What is Interest?
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-green-50 p-4 rounded-lg border-2 border-green-200">
+                    <h3 class="text-lg font-semibold text-green-700 mb-2">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        When You SAVE Money
+                    </h3>
+                    <p class="text-gray-700">
+                        🏦 The bank pays YOU interest!<br>
+                        💰 Your money grows over time<br>
+                        📈 The longer you save, the more you earn!
+                    </p>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg border-2 border-red-200">
+                    <h3 class="text-lg font-semibold text-red-700 mb-2">
+                        <i class="fas fa-minus-circle mr-2"></i>
+                        When You BORROW Money
+                    </h3>
+                    <p class="text-gray-700">
+                        🏦 YOU pay the bank interest<br>
+                        💸 You owe more than you borrowed<br>
+                        ⏰ The longer you wait, the more you owe!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Setup -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-center text-blue-600 mb-4">
+                Choose Your Piggy Bank Strategy!
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Magic Seed Bank -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                    <h3 class="text-xl font-bold text-purple-700 mb-2">
+                        <i class="fas fa-seedling mr-2"></i>
+                        Magic Seed Bank
+                    </h3>
+                    <div class="text-lg">
+                        <p class="mb-2">Starting Money: <span class="font-bold text-green-600">$1</span></p>
+                        <p class="mb-2">Growth: <span class="font-bold text-purple-600">Doubles every day!</span></p>
+                        <p class="text-sm text-gray-600">Day 1: $1 → Day 2: $2 → Day 3: $4...</p>
+                    </div>
+                </div>
+
+                <!-- Steady Saver Bank -->
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
+                    <h3 class="text-xl font-bold text-blue-700 mb-2">
+                        <i class="fas fa-coins mr-2"></i>
+                        Steady Saver Bank
+                    </h3>
+                    <div class="text-lg">
+                        <p class="mb-2">Starting Money: <span class="font-bold text-green-600">$100</span></p>
+                        <p class="mb-2">Growth: <span class="font-bold text-blue-600">+$100 every day</span></p>
+                        <p class="text-sm text-gray-600">Day 1: $100 → Day 2: $200 → Day 3: $300...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="text-center mb-6">
+            <button id="startBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg mr-4 transition">
+                <i class="fas fa-play mr-2"></i>Start Animation
+            </button>
+            <button id="pauseBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg mr-4 transition" disabled>
+                <i class="fas fa-pause mr-2"></i>Pause
+            </button>
+            <button id="resetBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition">
+                <i class="fas fa-redo mr-2"></i>Reset
+            </button>
+        </div>
+
+        <!-- Current Status -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="text-center mb-4">
+                <h3 class="text-2xl font-bold text-gray-800">
+                    Day <span id="currentDay" class="text-blue-600">1</span>
+                </h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-purple-50 p-4 rounded-lg text-center">
+                    <h4 class="text-lg font-semibold text-purple-700 mb-2">Magic Seed Bank</h4>
+                    <div class="text-3xl font-bold text-purple-600" id="magicAmount">$1</div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg text-center">
+                    <h4 class="text-lg font-semibold text-blue-700 mb-2">Steady Saver Bank</h4>
+                    <div class="text-3xl font-bold text-blue-600" id="steadyAmount">$100</div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-lg font-semibold" id="winner">Steady Saver is winning!</p>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-4">Growth Comparison Chart</h3>
+            <div style="height: 400px;">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Key Insights -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-center text-orange-600 mb-4">
+                <i class="fas fa-brain mr-2"></i>
+                What Did We Learn?
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                    <i class="fas fa-turtle text-4xl text-green-600 mb-2"></i>
+                    <h4 class="font-bold mb-2">Slow and Steady?</h4>
+                    <p class="text-sm">Sometimes the turtle doesn't win! Magic Seed started small but grew HUGE!</p>
+                </div>
+                <div class="text-center p-4 bg-blue-50 rounded-lg">
+                    <i class="fas fa-clock text-4xl text-blue-600 mb-2"></i>
+                    <h4 class="font-bold mb-2">Time is Magic</h4>
+                    <p class="text-sm">The longer you wait, the more powerful compound interest becomes!</p>
+                </div>
+                <div class="text-center p-4 bg-purple-50 rounded-lg">
+                    <i class="fas fa-rocket text-4xl text-purple-600 mb-2"></i>
+                    <h4 class="font-bold mb-2">Small Start, Big Finish</h4>
+                    <p class="text-sm">Starting with just $1 can lead to millions if you're patient!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDay = 1;
+        let magicAmount = 1;
+        let steadyAmount = 100;
+        let isAnimating = false;
+        let animationTimer;
+        let chart;
+
+        // Chart setup
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        const chartData = {
+            labels: ['Day 1'],
+            datasets: [{
+                label: 'Magic Seed Bank',
+                data: [1],
+                borderColor: 'rgb(147, 51, 234)',
+                backgroundColor: 'rgba(147, 51, 234, 0.2)',
+                tension: 0.1
+            }, {
+                label: 'Steady Saver Bank',
+                data: [100],
+                borderColor: 'rgb(59, 130, 246)',
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                tension: 0.1
+            }]
+        };
+
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        type: 'logarithmic'
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        function updateDisplay() {
+            document.getElementById('currentDay').textContent = currentDay;
+            document.getElementById('magicAmount').textContent = `$${magicAmount.toLocaleString()}`;
+            document.getElementById('steadyAmount').textContent = `$${steadyAmount.toLocaleString()}`;
+            
+            const winner = document.getElementById('winner');
+            if (magicAmount > steadyAmount) {
+                winner.textContent = `Magic Seed is winning by $${(magicAmount - steadyAmount).toLocaleString()}!`;
+                winner.className = 'text-lg font-semibold text-purple-600';
+            } else {
+                winner.textContent = `Steady Saver is winning by $${(steadyAmount - magicAmount).toLocaleString()}!`;
+                winner.className = 'text-lg font-semibold text-blue-600';
+            }
+        }
+
+        function updateChart() {
+            chart.data.labels.push(`Day ${currentDay}`);
+            chart.data.datasets[0].data.push(magicAmount);
+            chart.data.datasets[1].data.push(steadyAmount);
+            chart.update('none');
+        }
+
+        function nextDay() {
+            if (currentDay < 30) {
+                currentDay++;
+                magicAmount *= 2; // Double every day
+                steadyAmount += 100; // Add $100 every day
+                updateDisplay();
+                updateChart();
+            } else {
+                stopAnimation();
+            }
+        }
+
+        function startAnimation() {
+            if (!isAnimating) {
+                isAnimating = true;
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('pauseBtn').disabled = false;
+                animationTimer = setInterval(nextDay, 1000);
+            }
+        }
+
+        function stopAnimation() {
+            isAnimating = false;
+            clearInterval(animationTimer);
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+        }
+
+        function resetGame() {
+            stopAnimation();
+            currentDay = 1;
+            magicAmount = 1;
+            steadyAmount = 100;
+            
+            // Reset chart
+            chart.data.labels = ['Day 1'];
+            chart.data.datasets[0].data = [1];
+            chart.data.datasets[1].data = [100];
+            chart.update();
+            
+            updateDisplay();
+        }
+
+        // Event listeners
+        document.getElementById('startBtn').addEventListener('click', startAnimation);
+        document.getElementById('pauseBtn').addEventListener('click', stopAnimation);
+        document.getElementById('resetBtn').addEventListener('click', resetGame);
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>
+
+
